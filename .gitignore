@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Virtual environment
+.venv/
+venv/
+ENV/
+
+# Database
+*.sqlite3
+db.sqlite3
+
+# Environment variables
+!.env.example
+.env
+
+# Logs
+logs/*.log
+
+# Media files (загруженные пользователями)
+# Игнорируем всё внутри media
+deskhub/media/**/*
+
+# НО не игнорируем файлы с именем default.jpg (в любых подпапках)
+!deskhub/media/**/default.jpg
+
+# Static files (собранные командой collectstatic)
+staticfiles/
+
+# IDE
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db

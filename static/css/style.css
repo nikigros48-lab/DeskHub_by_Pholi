@@ -1,0 +1,751 @@
+/* ===== Глобальные сбросы ===== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: #f0f4f8;
+    color: #1e293b;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 0 1rem;
+}
+a {
+    text-decoration: none;
+    color: #2563eb;
+}
+a:hover {
+    text-decoration: underline;
+}
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* ===== Шапка ===== */
+header {
+    background: #0f172a;
+    color: #f8fafc;
+    padding: 0.75rem 1rem;
+    border-bottom: 2px solid #1e293b;
+    border-radius: 0 0 12px 12px;
+}
+header .container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+}
+.logo a {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #f8fafc;
+    letter-spacing: -0.5px;
+}
+.logo a:hover {
+    text-decoration: none;
+}
+nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    justify-content: space-around;
+    width: 100%;
+}
+nav ul li a {
+    color: #cbd5e1;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+    white-space: nowrap;
+}
+nav ul li a:hover {
+    color: #f8fafc;
+    text-decoration: none;
+}
+header > div:last-child {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-left: auto;
+}
+header button[type="submit"] {
+    background: #ef4444;
+    border: none;
+    color: #ffffff;
+    padding: 0.4rem 1.2rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+header button[type="submit"]:hover {
+    background: #dc2626;
+    transform: scale(1.03);
+}
+header button[type="submit"]:active {
+    transform: scale(0.97);
+}
+header > div:last-child a {
+    display: inline-block;
+    background: #2563eb;
+    color: #ffffff;
+    padding: 0.4rem 1.2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.2s, transform 0.1s;
+}
+header > div:last-child a:hover {
+    background: #1d4ed8;
+    transform: scale(1.03);
+    text-decoration: none;
+}
+header > div:last-child a:active {
+    transform: scale(0.97);
+}
+
+/* ===== Основной контент ===== */
+main {
+    flex: 1;
+    padding: 1.5rem 0;
+}
+
+/* ===== Сообщения (messages) ===== */
+.messages {
+    margin-bottom: 2rem;
+}
+.messages__item {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+}
+.messages__item--success {
+    background: #dcfce7;
+    color: #166534;
+}
+.messages__item--info {
+    background: #dbeafe;
+    color: #1e40af;
+}
+.messages__item--warning {
+    background: #fef9c3;
+    color: #854d0e;
+}
+.messages__item--error {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* ===== Карточки ===== */
+.card {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    padding: 1.75rem 2rem;
+    margin-bottom: 2rem;
+    transition: box-shadow 0.2s;
+}
+.card:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+/* ===== Заголовки ===== */
+main h1 {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+}
+main h2 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+}
+/* ===== Фильтры ===== */
+
+.filters {
+    margin-bottom: 15px;
+}
+
+/* ===== Коворкинги (список) ===== */
+.coworking_list ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+}
+.coworking_list li {
+    margin-bottom: 0;
+}
+.coworking_list .coworking {
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+    height: 100%;
+}
+.coworking_list .coworking:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.10);
+}
+.coworking_list .coworking a {
+    display: block;
+    padding: 1.25rem;
+    color: inherit;
+    text-decoration: none;
+}
+.coworking_list .coworking img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 0.75rem;
+}
+.coworking_list .coworking h2 {
+    font-size: 1.3rem;
+    margin-bottom: 0.25rem;
+}
+.coworking_list .coworking p {
+    color: #475569;
+    font-size: 0.95rem;
+}
+.coworking_list .coworking small {
+    color: #64748b;
+    font-size: 0.85rem;
+}
+
+/* ===== Детали коворкинга ===== */
+.coworking_detail {
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    margin: 2rem auto;
+    max-width: 900px;
+}
+
+.coworking_detail__media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 7;
+    overflow: hidden;
+    background: #cbd5e1;
+}
+
+.coworking_detail__media-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: blur(24px) brightness(0.75) saturate(1.15);
+    transform: scale(1.15);
+}
+
+.coworking_detail__media-fg {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+}
+
+.coworking_detail__scrim {
+    position: absolute;
+    z-index: 2;
+    inset: auto 0 0 0;
+    padding: 2.5rem 2rem 1.25rem;
+    background: linear-gradient(to top, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0) 100%);
+}
+
+.coworking_detail__scrim h1 {
+    color: #ffffff;
+    font-size: 2rem;
+    margin: 0;
+}
+
+.coworking_detail__body {
+    padding: 1.5rem 2rem 2rem 2rem;
+}
+
+.coworking_detail__body p {
+    color: #475569;
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+}
+
+.coworking_detail__body p:last-child {
+    margin-bottom: 0;
+}
+
+/* ===== Действия на странице коворкинга ===== */
+.coworking-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+.coworking-actions .btn {
+    padding: 0.7rem 2rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.2s, transform 0.1s;
+}
+.coworking-actions .btn-primary {
+    background: #2563eb;
+    color: #ffffff;
+}
+.coworking-actions .btn-primary:hover {
+    background: #1d4ed8;
+    transform: scale(1.02);
+}
+.coworking-actions .btn-secondary {
+    background: #64748b;
+    color: #ffffff;
+}
+.coworking-actions .btn-secondary:hover {
+    background: #475569;
+    transform: scale(1.02);
+}
+
+/* ===== Список мест ===== */
+.place_list {
+    max-width: 800px;
+    margin: 0 auto;
+}
+.place_list h2 {
+    margin-bottom: 1.5rem;
+}
+.place_list a {
+    display: block;
+    background: #2563eb;
+    color: #ffffff;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+    border: none;
+    box-shadow: 0 2px 4px rgba(37,99,235,0.2);
+    transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+    text-decoration: none;
+}
+.place_list a:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(37,99,235,0.3);
+    text-decoration: none;
+}
+
+/* ===== Страница места ===== */
+.slot-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.75rem;
+}
+.slot-list li {
+    background: #f8fafc;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+.slot-list li label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+.slot-list input[type="checkbox"] {
+    width: 1.2rem;
+    height: 1.2rem;
+    accent-color: #2563eb;
+}
+.back {
+    margin-top: 2rem;
+}
+.back a {
+    color: #64748b;
+    font-weight: 500;
+}
+.back a:hover {
+    color: #1e293b;
+}
+
+/* ===== Корзина ===== */
+.cart-list {
+    list-style: none;
+    padding: 0;
+}
+.cart-item {
+    background: #ffffff;
+    padding: 1.2rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.cart-item__info {
+    font-size: 1rem;
+}
+.cart-item__form {
+    display: inline;
+}
+.cart-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+}
+.btn-sm {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.85rem;
+}
+.empty-cart {
+    text-align: center;
+    padding: 2rem 0;
+}
+.empty-cart .btn {
+    margin-top: 0.5rem;
+}
+.empty-message {
+    text-align: center;
+    padding: 2rem;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+/* ===== Мои заявки ===== */
+.reservation-list {
+    list-style: none;
+    padding: 0;
+}
+.reservation-item {
+    background: #ffffff;
+    padding: 1.2rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    margin-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.reservation-item > div:first-child {
+    flex: 1;
+}
+.reservation-item > div:last-child {
+    margin-left: 1rem;
+}
+.badge {
+    display: inline-block;
+    padding: 0.2rem 0.7rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+.badge--awaiting {
+    background: #fef9c3;
+    color: #854d0e;
+}
+.badge--approved {
+    background: #dbeafe;
+    color: #1e40af;
+}
+.badge--declined,
+.badge--cancelled {
+    background: #fee2e2;
+    color: #991b1b;
+}
+.badge--completed {
+    background: #dcfce7;
+    color: #166534;
+}
+
+/* ===== Кнопки (общие) ===== */
+.btn {
+    display: inline-block;
+    padding: 0.6rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+.btn-primary {
+    background: #2563eb;
+    color: #fff;
+}
+.btn-primary:hover {
+    background: #1d4ed8;
+}
+.btn-danger {
+    background: #ef4444;
+    color: #fff;
+}
+.btn-danger:hover {
+    background: #dc2626;
+}
+.btn-secondary {
+    background: #64748b;
+    color: #fff;
+}
+.btn-secondary:hover {
+    background: #475569;
+}
+.btn-success {
+    background: #22c55e;
+    color: #fff;
+}
+.btn-success:hover {
+    background: #16a34a;
+}
+.btn-sm {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.85rem;
+}
+
+/* ===== Информационные страницы ===== */
+.about,
+.tech-support,
+.address,
+.main_page {
+    background: #ffffff;
+    padding: 2rem 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    max-width: 760px;
+    margin: 2rem auto;
+}
+.about h2,
+.tech-support p,
+.address p,
+.main_page h2 {
+    margin-bottom: 0.75rem;
+}
+.tech-support ul,
+.address ul {
+    list-style: none;
+    padding: 0;
+}
+.tech-support ul li,
+.address ul li {
+    padding: 0.4rem 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+.tech-support ul li:last-child,
+.address ul li:last-child {
+    border-bottom: none;
+}
+.main_page {
+    text-align: center;
+}
+.main_page p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+.main_page a {
+    display: inline-block;
+    background: #2563eb;
+    color: #ffffff;
+    padding: 0.7rem 2.2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background 0.2s, transform 0.1s;
+}
+.main_page a:hover {
+    background: #1d4ed8;
+    transform: scale(1.02);
+    text-decoration: none;
+}
+
+/* ===== Формы авторизации ===== */
+.login_form,
+.registration_form,
+.profile-form {
+    max-width: 440px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 2.5rem 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+.login_form form,
+.registration_form form,
+.profile-form form {
+    display: flex;
+    flex-direction: column;
+}
+.login_form form p,
+.registration_form form p,
+.profile-form form p {
+    margin-bottom: 1.25rem;
+}
+.login_form form label,
+.registration_form form label,
+.profile-form form label {
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: block;
+    margin-bottom: 0.3rem;
+}
+.login_form form input,
+.registration_form form input,
+.profile-form form input {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+.login_form form button,
+.registration_form form button,
+.profile-form form button {
+    background: #2563eb;
+    color: #ffffff;
+    border: none;
+    padding: 0.7rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    margin-top: 0.5rem;
+}
+.login_form form button:hover,
+.registration_form form button:hover,
+.profile-form form button:hover {
+    background: #1d4ed8;
+    transform: scale(1.02);
+}
+
+/* ===== Профиль ===== */
+.profile {
+    max-width: 620px;
+    margin: 0 auto;
+}
+.profile a {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+.profile .profile-form {
+    box-shadow: none;
+    padding: 0;
+}
+.profile a[href*="reservation:requests"] {
+    display: inline-block;
+    background: #2563eb;
+    color: #ffffff !important;
+    padding: 0.6rem 1.8rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background 0.2s, transform 0.1s;
+    text-decoration: none;
+}
+.profile a[href*="reservation:requests"]:hover {
+    background: #1d4ed8;
+    transform: scale(1.02);
+    text-decoration: none;
+}
+
+/* ===== Футер ===== */
+footer {
+    background: #0f172a;
+    color: #94a3b8;
+    text-align: center;
+    padding: 1.5rem 0;
+    margin-top: 2rem;
+    border-top: 1px solid #1e293b;
+}
+footer p {
+    font-size: 0.9rem;
+}
+
+/* ===== Адаптивность ===== */
+@media (max-width: 768px) {
+    body {
+        padding: 0 0.5rem;
+    }
+    header .container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+    }
+    nav ul {
+        justify-content: center;
+        gap: 0.8rem;
+    }
+    header > div:last-child {
+        justify-content: center;
+        margin-left: 0;
+    }
+    .coworking_list ul {
+        grid-template-columns: 1fr;
+    }
+    .place_list a {
+        font-size: 0.95rem;
+    }
+    .reservation-item {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+    .reservation-item > div:last-child {
+        margin-left: 0;
+        margin-top: 0.75rem;
+    }
+    .cart-item {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+    .cart-item__form {
+        margin-top: 0.5rem;
+    }
+    .cart-actions {
+        justify-content: center;
+    }
+    .slot-list {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media (max-width: 480px) {
+    .slot-list {
+        grid-template-columns: 1fr;
+    }
+    .cities input[type="submit"] {
+        padding: 0.4rem 1rem;
+        font-size: 0.9rem;
+    }
+}

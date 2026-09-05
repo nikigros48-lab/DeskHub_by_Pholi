@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Корзина{% endblock title %}
+{% block content %}
+    <h1>Корзина</h1>
+
+    {% if cart %}
+        <ul class="cart-list">
+            {% for item in cart %}
+                <li class="cart-item">
+                    <span class="cart-item__info">
+                        {{ item.place_name }} – {{ item.date }} с {{ item.time_start }} по {{ item.time_end }}
+                        ({{ item.amount_people }} чел.)
+                    </span>
+                    <form action="{% url 'cart:delete_item' %}" method="post" class="cart-item__form">
+                        {% csrf_token %}
+                        <input type="hidden" name="slot_id" value="{{ item.slot_id }}">
+                        <button type="submit" class="btn btn-danger btn-sm">✕</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <div class="cart-actions">
+            <form action="{% url 'reservation:create' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Забронировать слоты</button>
+            </form>
+            <form action="{% url 'cart:clear' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-secondary">Очистить корзину</button>
+            </form>
+        </div>
+    {% else %}
+        <div class="empty-cart">
+            <p class="empty-message">Корзина пуста.</p>
+            <a href="{% url 'coworking:list' %}" class="btn btn-primary">Перейти к списку коворкингов</a>
+        </div>
+    {% endif %}
+{% endblock %}

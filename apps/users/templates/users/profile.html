@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Профиль{% endblock title %}
+{% block content %}
+    <div class="profile">
+        <a href="{% url 'reservation:requests' %}">Мои заявки</a>
+        <form method="post">
+            {{ form.as_p }}
+            <button>Сохранить</button>
+        </form>
+    </div>
+{% endblock content %}

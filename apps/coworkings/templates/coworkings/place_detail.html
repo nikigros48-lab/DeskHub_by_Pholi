@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}{{ place }}{% endblock title %}
+{% block content %}
+    <h1>{{ place.get_type_display }} – {{ place.name }}</h1>
+    <p>Коворкинг: {{ place.coworking.name }}</p>
+    <p>Вместимость: {{ place.capacity }}</p>
+
+    <form method="get" action="">
+        <label for="date">Выберите дату:</label>
+        <input type="date" name="date" id="date" value="{{ selected_date|date:'Y-m-d' }}">
+        <button type="submit" class="btn btn-secondary">Показать слоты</button>
+    </form>
+
+    <p><small>Слоты показаны для даты {{ filter_date|date:"d.m.Y" }} (по времени коворкинга).</small></p>
+
+    <form method="post" action="{% url 'cart:add_item' %}">
+        {% csrf_token %}
+        <input type="hidden" name="place_id" value="{{ place.id }}">
+        <input type="hidden" name="date" value="{{ selected_date|date:'Y-m-d' }}">
+
+        <h3>Доступные слоты на {{ selected_date|date:"d.m.Y" }}</h3>
+        <p><small>Показаны только слоты, начинающиеся после текущего времени.</small></p>
+
+        <div>
+            <label for="amount_people">Количество человек:</label>
+            <input type="number" name="amount_people" id="amount_people" value="1" min="1" max="{{ place.capacity }}" required>
+            <small>Максимум {{ place.capacity }}</small>
+        </div>
+
+        {% if free_slots %}
+            <ul class="slot-list">
+                {% for slot in free_slots %}
+                    <li>
+                        <label>
+                            <input type="checkbox" name="slot_ids" value="{{ slot.id }}">
+                            {{ slot.time_start|time:"H:i" }} – {{ slot.time_end|time:"H:i" }}
+                        </label>
+                    </li>
+                {% endfor %}
+            </ul>
+            <br>
+            <button type="submit" class="btn btn-primary">Добавить выбранные в корзину</button>
+        {% else %}
+            <p>На эту дату нет свободных слотов (все либо заняты, либо уже начались).</p>
+        {% endif %}
+    </form>
+    <div class="back">
+        <a href="{% url 'coworking:detail' place.coworking.id %}">Назад к коворкингу</a>
+    </div>
+{% endblock %}

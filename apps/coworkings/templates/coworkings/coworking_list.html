@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Список коворкингов{% endblock title %}
+{% block content %}
+    <div class="coworking_list">
+        <div class="filters">
+            {% if has_filters %}
+                <div class="active_filters">
+                    <span>Активные фильтры:
+                        {% if selected_city %}Город: {{ selected_city }}{% endif %}
+                        {% if selected_place_type %} | Тип: {{ selected_place_type_display }}{% endif %}
+                        {% if selected_date %} | Дата: {{ selected_date }}{% endif %}
+                    </span>
+                    <a href="{% url 'coworking:filters' %}" class="btn btn-secondary btn-sm">Изменить</a>
+                    <form action="{% url 'coworking:clear_filters' %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm">Сбросить фильтры</button>
+                    </form>
+                </div>
+            {% else %}
+                <a href="{% url 'coworking:filters' %}" class="btn btn-primary">Фильтры</a>
+            {% endif %}
+        </div>
+        {% if coworkings %}
+            <ul>
+                {% for coworking in coworkings %}
+                    <li>
+                        <div class="coworking">
+                            <a href="{% url "coworking:detail" coworking.id %}">
+                                <h2>{{ coworking.name }}</h2>
+                                <img src="{{ coworking.picture.url }}" alt="{{ coworking.name }}">
+                                <p>{{ coworking.city }} - {{ coworking.address }}</p>
+                                <small>Рабочие часы с {{ coworking.work_time_start }} до {{ coworking.work_time_end }}</small>
+                            </a>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <h2>Коворкинги не найдены</h2>
+        {% endif %}
+    </div>
+{% endblock content %}

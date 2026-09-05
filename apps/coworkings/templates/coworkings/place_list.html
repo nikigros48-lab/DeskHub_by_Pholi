@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Список мест{% endblock title %}
+{% block content %}
+    <div class="place_list">
+        <h2>Список мест в коворкинге:</h2>
+        {% if places %}
+            {% for place in places %}
+                <a href="{% url 'coworking:place_detail' place.coworking_id place.id %}">{{ place.get_type_display }} - {{ place.name }}</a>
+            {% endfor %}
+        {% else %}
+            <h2>Нет доступных мест</h2>
+        {% endif %}
+    </div>
+{% endblock content %}

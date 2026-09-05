@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>
+        {% block title %}Default Title{% endblock title %}
+    </title>
+    {% block style %}{% endblock style %}
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="{% url 'info:main_page' %}">🏢 DeskHub</a>
+        </div>
+        <nav>
+            <ul>
+                {% if user.is_staff %}
+                    <li><a href="{% url "admin:reservations_reservation_changelist" %}?status__exact=awaiting">Управление заявками</a></li>
+                {% endif %}
+                <li><a href="{% url 'info:main_page' %}">Главная</a></li>
+                <li><a href="{% url 'coworking:list' %}">Коворкинги</a></li>
+                <li><a href="{% url 'info:about' %}">О нас</a></li>
+                <li><a href="{% url 'info:contacts' %}">Контакты</a></li>
+                <li>
+                    <a href="{% url 'cart:detail' %}">
+                        Корзина{% if request.cart_count %} ({{ request.cart_count }}){% endif %}
+                    </a>
+                </li>
+                <li><a href="{% url 'users:profile' %}">Профиль</a></li>
+            </ul>
+        </nav>
+        <div>
+            {% if user.is_authenticated %}
+                <span>Привет, {{ user.first_name|default:user.username }}</span>
+                <form action="{% url 'users:logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Выйти</button>
+                </form>
+            {% else %}
+                <a href="{% url 'users:login' %}">Войти</a>
+                <a href="{% url 'users:registration' %}">Регистрация</a>
+            {% endif %}
+        </div>
+    </header>
+    <main>
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="messages__item messages__item--{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p>&copy; 2026 DeskHub. Все права защищены.</p>
+    </footer>
+</body>
+</html>

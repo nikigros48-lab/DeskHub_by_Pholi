@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}{{ coworking.name }}{% endblock title %}
+{% block content %}
+    <div class="coworking_detail">
+        <div class="coworking_detail__media">
+            <img src="{{ coworking.picture.url }}" alt="" aria-hidden="true" class="coworking_detail__media-bg">
+            <img src="{{ coworking.picture.url }}" alt="{{ coworking.name }}" class="coworking_detail__media-fg">
+            <div class="coworking_detail__scrim">
+                <h1>{{ coworking.name }}</h1>
+            </div>
+        </div>
+        <div class="coworking_detail__body">
+            <p>Находится по адресу: {{ coworking.city.name }} {{ coworking.address }}</p>
+            <p>Рабочие часы с {{ coworking.work_time_start }} до {{ coworking.work_time_end }}</p>
+        </div>
+    </div>
+    <div class="coworking-actions">
+        <a href="{% url 'coworking:place_list' coworking.id %}" class="btn btn-primary">Забронируйте место</a>
+        <a href="{% url 'coworking:list' %}" class="btn btn-secondary">Вернуться к списку коворкингов</a>
+    </div>
+{% endblock content %}
