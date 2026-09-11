@@ -18,7 +18,7 @@ DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
 
 ALLOWED_HOSTS = [h.strip() for h in os.getenv('ALLOWED_HOSTS', '').split(',') if h.strip()]
 
-TIME_ZONE = 'Asia/Novosibirsk'
+TIME_ZONE = os.getenv('TIME_ZONE', 'Asia/Novosibirsk')
 
 RESERVATION_RESPONSE_DEADLINE_HOURS = int(os.getenv('RESERVATION_RESPONSE_DEADLINE_HOURS', '12'))
 
