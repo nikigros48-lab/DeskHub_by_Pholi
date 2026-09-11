@@ -5,6 +5,13 @@
 - SQLite (dev)
 - Gunicorn + Nginx (prod)
 
+## Продакшен-окружение
+
+- Домен: https://deskhub-by-pholi.ru
+- Хостинг: REG.RU, облачный VPS (Рег.облако), Москва
+- ОС: Ubuntu 24.04 LTS
+- Стек: Nginx (reverse proxy + статика) + Gunicorn (3 workers) + Django + SQLite
+
 ## Локальный запуск
 
 1. Клонировать репозиторий и перейти в папку проекта.
