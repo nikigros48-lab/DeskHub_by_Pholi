@@ -1,26 +1,34 @@
 import os
 from pathlib import Path
 
-from dotenv import load_dotenv
+import environ
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-load_dotenv(BASE_DIR / '.env')
+env = environ.Env(
+    DEBUG=(bool, False),
+    SECRET_KEY=(str, None),
+    ALLOWED_HOSTS=(list, []),
+    TIME_ZONE=(str, "Asia/Novosibirsk"),
+    RESERVATION_RESPONSE_DEADLINE_HOURS=(int, 12),
+)
+env.read_env(BASE_DIR / '.env')
 
-SECRET_KEY = os.getenv('SECRET_KEY')
-if not SECRET_KEY:
+
+SECRET_KEY = env('SECRET_KEY')
+if SECRET_KEY is None:
     raise ValueError(
         "SECRET_KEY не найден. Убедись, что файл .env существует "
         "(скопируй .env.example в .env и заполни значения)."
     )
 
-DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
+DEBUG = env("DEBUG")
 
-ALLOWED_HOSTS = [h.strip() for h in os.getenv('ALLOWED_HOSTS', '').split(',') if h.strip()]
+ALLOWED_HOSTS = env("ALLOWED_HOSTS")
 
-TIME_ZONE = os.getenv('TIME_ZONE', 'Asia/Novosibirsk')
+TIME_ZONE = env("TIME_ZONE")
 
-RESERVATION_RESPONSE_DEADLINE_HOURS = int(os.getenv('RESERVATION_RESPONSE_DEADLINE_HOURS', '12'))
+RESERVATION_RESPONSE_DEADLINE_HOURS = env("RESERVATION_RESPONSE_DEADLINE_HOURS")
 
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 7
@@ -140,7 +148,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
 USE_I18N = True
 
@@ -148,7 +156,7 @@ USE_TZ = False
 
 
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
