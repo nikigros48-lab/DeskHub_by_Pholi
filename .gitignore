@@ -14,6 +14,9 @@ ENV/
 # Database
 *.sqlite3
 db.sqlite3
+data/
+db_data/
+postgres_data/
 
 # Environment variables
 !.env.example

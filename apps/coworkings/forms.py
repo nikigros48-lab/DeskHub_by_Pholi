@@ -9,7 +9,7 @@ class CoworkingFilterForm(forms.Form):
         widget=forms.Select(attrs={'class': 'form-control'})
     )
     place_type = forms.ChoiceField(
-        choices=[('', 'Все типы')] + list(Place.PLACE_TYPE),
+        choices=[("", "Все типы")] + Place.PlaceType.choices,
         required=False,
         widget=forms.Select(attrs={'class': 'form-control'})
     )

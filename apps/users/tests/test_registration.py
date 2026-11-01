@@ -33,7 +33,7 @@ def test_registration_view_post_success(client, registration_form_data):
 @pytest.mark.django_db
 def test_registration_view_post_failure(client, registration_form_data, scenario_name, overrides, make_user):
     if scenario_name == "Username is already taken":
-        make_user()
+        make_user(username="testuser")
 
     users_count_before = User.objects.count()
 

@@ -3,25 +3,6 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 
 
 @pytest.fixture
-def make_user(django_user_model):
-    def _create_user(**kwargs):
-        defaults = {
-            "username": 'testuser',
-            "password": "Test_password123",
-            "phone": "89991639999",
-        }
-
-        defaults.update(kwargs)
-
-        user = django_user_model.objects.create_user(**defaults)
-
-        user.raw_password = defaults["password"] # type: ignore
-
-        return user
-    return _create_user
-
-
-@pytest.fixture
 def profile_form_data():
     small_gif = (
         b'\x47\x49\x46\x38\x39\x61\x01\x00\x01\x00\x00\x00\x00!\xf9\x04'

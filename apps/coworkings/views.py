@@ -1,7 +1,7 @@
 from datetime import datetime
 from zoneinfo import ZoneInfo
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views import View
+from django.views.decorators.http import require_POST
 from django.views.generic import ListView, DetailView
 from .models import Coworking, Place, City, Slot
 from django.views.generic import FormView
@@ -37,13 +37,13 @@ class CoworkingListView(CustomQSMixin, ListView):
             qs = qs.filter(place__type=place_type, place__is_active=True).distinct()
 
         filter_date_str = self.request.session.get("filter_date")
-        if filter_date_str:
+        filter_date = None
+
+        if isinstance(filter_date_str, str) and filter_date_str:
             try:
                 filter_date = datetime.strptime(filter_date_str, '%Y-%m-%d').date()
             except ValueError:
-                filter_date = None
-        else:
-            filter_date = None
+                pass
 
         if filter_date:
             coworking_ids = list(qs.values_list('id', flat=True))
@@ -82,8 +82,9 @@ class CoworkingListView(CustomQSMixin, ListView):
 
         place_type = self.request.session.get("place_type")
         context["selected_place_type"] = place_type
-        place_type_display = dict(Place.PLACE_TYPE).get(place_type, '')
-        context["selected_place_type_display"] = place_type_display
+        context["selected_place_type_display"] = (
+            Place.PlaceType(place_type).label if place_type in Place.PlaceType.values else ""
+        )
 
         context["selected_date"] = self.request.session.get("filter_date")
         has_filters = any([
@@ -131,18 +132,17 @@ class PlaceDetailView(CustomQSMixin, DetailView):
         coworking = place.coworking
         coworking_tz = ZoneInfo(coworking.city.timezone)
 
+        now_coworking = datetime.now(coworking_tz).replace(tzinfo=None)
+
+        selected_date = now_coworking.date()
         date_str = self.request.GET.get('date')
         if date_str:
             try:
                 selected_date = datetime.strptime(date_str, '%Y-%m-%d').date()
             except ValueError:
-                selected_date = datetime.now().date()
-        else:
-            selected_date = datetime.now().date()
+                pass
 
         filter_date = selected_date
-
-        now_coworking = datetime.now(coworking_tz).replace(tzinfo=None)
 
         free_slots = place.slots.filter(
             user__isnull=True,
@@ -185,9 +185,9 @@ class CoworkingFilterView(LoginRequiredMixin, FormView):
         return redirect('coworking:list')
 
 
-class ClearFiltersView(View):
-    def post(self, request):
-        request.session.pop('selected_city', None)
-        request.session.pop('place_type', None)
-        request.session.pop('filter_date', None)
-        return redirect('coworking:list')
+@require_POST
+def clear_filters(request):
+    request.session.pop('selected_city', None)
+    request.session.pop('place_type', None)
+    request.session.pop('filter_date', None)
+    return redirect('coworking:list')

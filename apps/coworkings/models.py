@@ -1,9 +1,7 @@
 from zoneinfo import available_timezones
-
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator
 from django.db import models
-
 from apps.users.models import User
 
 
@@ -47,13 +45,12 @@ class Coworking(models.Model):
 
 
 class Place(models.Model):
-    PLACE_TYPE = (
-        ("Workplace", "Рабочее место"),
-        ("Meeting_room", "Переговорная"),
-    )
+    class PlaceType(models.TextChoices):
+        WORKPLACE = "Workplace", "Рабочее место"
+        MEETING_ROOM = "Meeting_room", "Переговорная"
 
     coworking = models.ForeignKey(Coworking, on_delete=models.CASCADE)
-    type = models.CharField(max_length=50, choices=PLACE_TYPE, verbose_name="Тип места")
+    type = models.CharField(max_length=50, choices=PlaceType.choices, verbose_name="Тип места")
     name = models.CharField(max_length=50, verbose_name="Название")
     picture = models.ImageField(upload_to="coworking/place", default="coworking/place/default.jpg", blank=True, null=True)
     capacity = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1)])
